@@ -1,14 +1,26 @@
 //防抖：在执行完后一段时间执行回调，如果在这段时间内在此执行将会取消之前的延时回调
 //频繁出发后，只执行一次
+// function debounce(fn,delay) {
+//     //1.初始化定时
+//     let timer = 0;
+//     return ()=>{
+//         //2.清除定时
+//         clearTimeout(timer);
+//         //3.等待n秒后执行
+//         timer = setTimeout(()=>{
+//             fn()
+//         },delay);
+//     }
+// }
+
 function debounce(fn,delay) {
-    //1.初始化定时
     let timer = 0;
     return ()=>{
-        //2.清除定时
+        const args = arguments;
+        const context = this;
         clearTimeout(timer);
-        //3.等待n秒后执行
         timer = setTimeout(()=>{
-            fn()
+            fn.apply(context,args);
         },delay);
     }
 }
@@ -28,3 +40,16 @@ function throtte(fn,delay) {
         }
     }
 }
+
+//防抖
+function fd( fn,delay ) {
+    let timer = null;
+    return (...args)=>{
+        const ctx = this;
+        clearTimeout(timer);
+        timer = setTimeout(()=>{
+            fn.apply(ctx,args);
+        },delay);
+    }
+}
+

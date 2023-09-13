@@ -50,3 +50,15 @@ function mp(p){
 
 console.log(typeof(mp));
 
+//防抖
+var debounce = (fn,delay) =>{
+    let timer =null;
+    return (...args)=>{
+        const ctx = this;
+        clearTimeout(timer);
+        timer=setTimeout(()=>{
+            fn.apply(ctx,args);
+        },delay);
+    }
+}
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>九宫格抽奖</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<br>
+<button onclick="start()">开始抽奖</button>
+</body>
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  var x = canvas.width / 2 - 150;
+  var y = canvas.height / 2 - 150;
+  var w = 100;
+  var h = 100;
+  var prizes = ["一等奖", "二等奖", "三等奖", "谢谢参与", "谢谢参与", "谢谢参与", "谢谢参与", "谢谢参与", "谢谢参与"];
+  var index = 0;
+  var isRunning = false;
+
+  // 绘制九宫格
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        ctx.beginPath();
+        ctx.rect(x + j * (w + 10), y + i * (h + 10), w, h);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.font = "20px Arial";
+        ctx.fillText(prizes[index], x + j * (w + 10) + 25, y + i * (h + 10) + 55);
+        index++;
+      }
+    }
+  }
+
+  // 开始抽奖
+  function start() {
+    if (isRunning) {
+      return;
+    }
+    isRunning = true;
+    var count = 0;
+    var interval = setInterval(function() {
+      index = Math.floor(Math.random() * prizes.length);
+      draw();
+      count++;
+      if (count > 20) {
+        clearInterval(interval);
+        isRunning = false;
+      }
+    }, 100);
+  }
+
+</script>
+</html>

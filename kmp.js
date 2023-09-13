@@ -20,19 +20,6 @@ var strStr = function(haystack, needle) {
         }
         return next;
     }
-    // let j = 0;
-    // let next = getnext(needle);
-    // for(i=0;i<haystack.length;++i){
-    //     while(j>0 && haystack[i] !== needle[j]){
-    //         j = next[j-1];
-    //     };
-    //     if(haystack[i]===needle[j]){
-    //         j++;
-    //     };
-    //     if(j === needle.length-1){
-    //         return i-needle.length+1
-    //     }
-    // }
     let next = getnext(needle);
     let j = 0;
     for (let i = 0; i < haystack.length; ++i) {

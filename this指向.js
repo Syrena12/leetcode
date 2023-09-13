@@ -13,7 +13,6 @@ var obj = {
 var arr = [1,2,3,4];
 obj.action(fn,...arr);
 
-
 var a=10;
 var abj = {
     a : 99,
